@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コンテンツ産業統計ダッシュボード 2024</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- ヘッダーセクション -->
+        <header class="dashboard-header">
+            <h1 class="main-title">コンテンツ産業統計ダッシュボード 2024</h1>
+            <p class="subtitle">日本と世界の市場分析</p>
+        </header>
+
+        <div class="dashboard-main">
+            <!-- フィルターパネル（左サイド） -->
+            <aside class="filter-panel">
+                <div class="filter-section">
+                    <h3 class="filter-title">地域フィルター</h3>
+                    <div class="filter-group">
+                        <label class="filter-option">
+                            <input type="radio" name="region" value="japan" checked>
+                            <span class="checkmark"></span>
+                            日本市場
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="region" value="global">
+                            <span class="checkmark"></span>
+                            世界市場比較
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="region" value="streaming">
+                            <span class="checkmark"></span>
+                            ストリーミング市場
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3 class="filter-title">業界セクター</h3>
+                    <div class="filter-group">
+                        <select id="sectorFilter" class="form-control">
+                            <option value="all">全体</option>
+                            <option value="game">ゲーム産業</option>
+                            <option value="anime">アニメ産業</option>
+                            <option value="music">音楽産業</option>
+                            <option value="movie">映画産業</option>
+                            <option value="video">動画コンテンツ</option>
+                            <option value="complex">複合型</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3 class="filter-title">表示年度</h3>
+                    <div class="year-range-container">
+                        <input type="range" id="yearStart" min="2020" max="2024" value="2020" class="year-slider">
+                        <input type="range" id="yearEnd" min="2020" max="2024" value="2024" class="year-slider">
+                        <div class="year-display">
+                            <span id="yearStartDisplay">2020</span> - <span id="yearEndDisplay">2024</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3 class="filter-title">チャートタイプ</h3>
+                    <div class="filter-group">
+                        <select id="chartType" class="form-control">
+                            <option value="bar">棒グラフ</option>
+                            <option value="line">線グラフ</option>
+                            <option value="pie">円グラフ</option>
+                            <option value="area">エリアチャート</option>
+                        </select>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- メインダッシュボードエリア -->
+            <main class="main-content">
+                <!-- 統計カード -->
+                <section class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalMarket">14.9兆円</div>
+                        <div class="stat-label">総市場規模（2024年）</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="growthRate">+11.9%</div>
+                        <div class="stat-label">前年比成長率</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="digitalRate">77.3%</div>
+                        <div class="stat-label">デジタル化率</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="globalExpansion">35.8%</div>
+                        <div class="stat-label">海外展開比率</div>
+                    </div>
+                </section>
+
+                <!-- チャートエリア -->
+                <section class="charts-grid">
+                    <div class="chart-container">
+                        <h3 class="chart-title">日本市場規模推移（2020-2024）</h3>
+                        <canvas id="trendsChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3 class="chart-title">世界市場比較</h3>
+                        <canvas id="globalChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3 class="chart-title">セクター別市場シェア</h3>
+                        <canvas id="sectorChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3 class="chart-title">プラットフォーム別分布</h3>
+                        <canvas id="platformChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- 詳細データテーブル -->
+                <section class="data-table-section">
+                    <h3 class="table-title">詳細データ</h3>
+                    <div class="table-container">
+                        <table id="dataTable" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>項目</th>
+                                    <th>市場規模（億円）</th>
+                                    <th>成長率（%）</th>
+                                    <th>シェア（%）</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- データはJavaScriptで動的に挿入 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
